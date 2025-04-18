@@ -1,0 +1,35 @@
+<div class="login-container">
+  <div class="login-form">
+    <mat-card>
+      <div class="logo-container">
+        <img src="logo.png" alt="Logo">
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="Email" type="email" formControlName="email" />
+        </mat-form-field>
+        <mat-error *ngIf="!loginForm.get('email')?.valid && loginForm.get('email')?.touched" class="form-text">
+          Enter a valid email
+        </mat-error>
+
+        <mat-form-field appearance="outline">
+          <input matInput type="{{hide ? 'password' : 'text'}}" placeholder="Password" formControlName="password" />
+          <span class="eye-button-container" (click)="hide = !hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </span>
+        </mat-form-field>
+
+        <mat-error *ngIf="!loginForm.get('password')?.valid && loginForm.get('password')?.touched" class="form-text">
+          Password must be of 6 characters
+        </mat-error>
+
+        <div class="forgot-password">
+          <a href="#" routerLink="../forgot-password">Forgot Password?</a>
+        </div>
+
+        <button mat-button type="submit" class="button">Log In</button>
+      </form>
+    </mat-card>
+  </div>
+</div>

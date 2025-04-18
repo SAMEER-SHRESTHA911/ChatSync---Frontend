@@ -1,0 +1,20 @@
+<div class="otp-container">
+  <mat-card>
+    <h2>Enter OTP</h2>
+    <p>An OTP has been sent to your email. Please enter it below:</p>
+
+    <form [formGroup]="otpForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>OTP</mat-label>
+        <input matInput placeholder="Enter OTP" formControlName="otp" required maxlength="6" (keypress)="validateInput($event)" />
+        <mat-error *ngIf="otpForm.get('otp')?.hasError('pattern')">
+          Enter a valid OTP
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-button type="submit" class="verify-button" [disabled]="otpForm.invalid">
+        Verify OTP
+      </button>
+    </form>
+  </mat-card>
+</div>
