@@ -3,5 +3,8 @@ export const ROUTE_CONSTANT = Object.freeze({
     chatRoom: 'chat-room',
     userAccount: 'user',
     forgotPassword: 'forgot-password',
-    otp:'otp'
+    otp: 'otp',
+    home: 'home',
+    error: '**',
+    notFound: 'not-found'
 });

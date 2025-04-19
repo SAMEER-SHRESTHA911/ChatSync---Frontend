@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { MaterialsModule } from '../../../material/material.module';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
 import * as ForgetPasswordActions from './store/forget-password.action';
 import { selectLoading, selectSuccess, selectError } from './store/forget-password.selector';
 import { Router, RouterModule } from '@angular/router';
@@ -21,6 +21,8 @@ export class ForgotPasswordComponent {
   success$!: Observable<boolean>;
   error$!: Observable<string>;
 
+  destroy$ = new Subject<void>();
+
   constructor(private fb: FormBuilder, private store: Store, private router: Router) { }
 
   ngOnInit(): void {
@@ -28,10 +30,9 @@ export class ForgotPasswordComponent {
       email: ['', [Validators.required, Validators.email]],
     });
 
-  // this.loading$ = this.store.pipe(select(selectLoading));
-
     this.success$ = this.store.pipe(
       select(selectSuccess),
+      takeUntil(this.destroy$),
       tap(success => {
         if (success) {
           alert('Password reset link sent successfully! Redirecting to login...');
@@ -40,14 +41,20 @@ export class ForgotPasswordComponent {
       })
     );
 
+
     this.error$ = this.store.pipe(
       select(selectError),
+      takeUntil(this.destroy$),
       tap(error => {
         if (error) {
           alert('Failed to send password reset link. Please try again.');
         }
       })
     );
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
   }
 
   onSubmit() {

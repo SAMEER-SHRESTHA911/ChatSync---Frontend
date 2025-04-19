@@ -1,4 +1,98 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+}
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  border-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: "Rubik", sans-serif;
+  font-style: normal;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Change the background color of Saturdays */
+.fc-day-sat {
+  background-color: #f0f0f0; /* Light gray */
+}
+
+/* Change the background color of Sundays */
+.fc-day-sun {
+  background-color: #f0f0f0; /* Light gray */
+}
+
+/* Optional: If you want to change the text color too */
+.fc-day-sat,
+.fc-day-sun {
+  color: #ff0000; /* Red text */
+}
+
+.fc-day-sat {
+  background-color: #f0f0f0;
+}
+
+.fc-day-sun {
+  background-color: #f0f0f0;
+}
+
+.fc-day-sat,
+.fc-day-sun {
+  color: #ff0000;
+}
+.fc-event-dot {
+  display: none !important;
+}
+
+.fc-event.checkin-late {
+  background-color: #f44336 !important;
+  border-color: #f44336 !important;
+  color: #ffffff !important;
+}
+
+.fc-event.checkin-on-time {
+  background-color: #4caf50 !important;
+  border-color: #4caf50 !important;
+  color: #ffffff !important;
+}
+
+.fc-event.checkout-early {
+  background-color: #f44336 !important;
+  border-color: #f44336 !important;
+  color: #ffffff !important;
+}
+
+.fc-event.checkout-on-time {
+  background-color: #4caf50 !important;
+  border-color: #4caf50 !important;
+  color: #ffffff !important;
+}

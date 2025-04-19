@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { PrivateRoutingModule } from './private-routing.module';
 import { RouterModule } from '@angular/router';
 import { PrivateComponent } from './private.component';
+import { NavbarComponent } from "../../../feature/private/navbar/navbar.component";
+import { SidebarComponent } from "../../../feature/private/sidebar/sidebar.component";
 
 
 
@@ -11,7 +13,9 @@ import { PrivateComponent } from './private.component';
   imports: [
     CommonModule,
     PrivateRoutingModule,
-    RouterModule
+    RouterModule,
+    NavbarComponent,
+    SidebarComponent
   ]
 })
 export class PrivateModule { }
