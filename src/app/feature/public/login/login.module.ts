@@ -13,7 +13,7 @@ import { MaterialsModule } from '../../../material/material.module';
   imports: [
     CommonModule,
     LoginRoutingModule,
-    MaterialsModule
+    MaterialsModule,
   ]
 })
 export class LoginModule { }

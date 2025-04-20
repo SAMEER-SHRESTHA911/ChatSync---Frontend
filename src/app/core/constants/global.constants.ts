@@ -1,5 +1,3 @@
-export const baseUrl = 'https://zg0qm2qz-1595.inc1.devtunnels.ms/apigateway';
-
 interface ILoggedInUser {
   id: string | null;
   isCheckedIn: boolean;

@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { provideEffects } from '@ngrx/effects';
+import { provideState } from '@ngrx/store';
 import { ROUTE_CONSTANT } from '../../core/constants/route.constants';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { OtpComponent } from './otp/otp.component';
 
 const routes: Routes = [
   {
@@ -19,9 +20,9 @@ const routes: Routes = [
     component:ForgotPasswordComponent
   },
   {
-    path: ROUTE_CONSTANT.otp,
-    component:OtpComponent
-  }
+    path: ROUTE_CONSTANT.registerAccount,
+    loadComponent: () => import('./register-account/register-account.component').then(m => m.RegisterAccountComponent),
+  },
 ];
 
 @NgModule({

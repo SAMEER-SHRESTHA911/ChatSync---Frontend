@@ -1,56 +1,82 @@
-// import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { Injectable } from '@angular/core';
-// import { Router } from '@angular/router';
-// import { catchError, map, Observable, throwError } from 'rxjs';
-// import { API_URL_CONSTANTS } from '../constants/api-constants';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
+import { API_URL_CONSTANTS } from '../constants/api-constants';
+import { baseUrl } from '../../environment';
+import { LoginPayload, LoginResponse, RegisterPayload, RegisterResponse } from '../models/interface';
 
-// const apiConstants = API_URL_CONSTANTS;
+const {
+    login,
+    register,
+    auth
+} = API_URL_CONSTANTS;
 
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class AuthService {
+@Injectable({
+    providedIn: 'root'
+})
+export class AuthService {
+    private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
 
-//   private baseUrl = '';
+    constructor(private http: HttpClient, private router: Router) { }
 
-//   constructor(private http: HttpClient, private router: Router) { }
+    setToken(token: string,): void {
+        localStorage.setItem('token', token);
+        this.isAuthenticatedSubject.next(true);
+    }
 
-//   setToken(token: string,): void {
-//     localStorage.setItem('token', token);
-//   }
+    setUserId(userId: string) {
+        localStorage.setItem('userId', userId)
+    }
 
-//   setUserId(userId: string) {
-//     localStorage.setItem('userId', userId)
-//   }
+    getToken(): string | null {
+        return localStorage.getItem('token');
+    }
 
-//   getToken(): string | null {
-//     return localStorage.getItem('token');
-//   }
+    getUserId(): string | null {
+        return localStorage.getItem('userId');
+    }
 
-//   getUserId(): string | null {
-//     return localStorage.getItem('userId');
-//   }
+    isLoggedIn(): boolean {
+        return this.hasToken();
+    }
 
-//   isLoggedIn(): boolean {
-//     const token = this.getToken();
-//     return token ? true : false;
-//   }
+    isAuthenticated(): Observable<boolean> {
+        return this.isAuthenticatedSubject.asObservable();
+    }
 
-//   login(credentials: { email: string; password: string }): Observable<any> {
-//     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    login(credentials: LoginPayload): Observable<any> {
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-//     return this.http.post(`${this.baseUrl}${API_URL_CONSTANTS.login}`, credentials, { headers }).pipe(
+        return this.http.post<LoginResponse>(`${baseUrl}/${auth}/${login}`, credentials, { headers }).pipe(
 
-//       map((response: any) => {
-//         const token = response.data.token;
-//         const employeeId = response.data.employeeId;
-//         this.setToken(token);
-//         this.setUserId(employeeId);
-//         return response;
-//       }),
-//       catchError(error => {
-//         return throwError(() => new Error('Failed to login'));
-//       })
-//     );
-//   }
-// }
+            tap((response: LoginResponse) => {
+                if (response.token) this.setToken(response.token);
+            }),
+            catchError(error => {
+                return throwError(() => new Error('Failed to login'));
+            })
+        );
+    }
+
+    register(registerData: RegisterPayload): Observable<RegisterResponse> {
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+        return this.http.post<RegisterResponse>(`${baseUrl}/${auth}/${register}`, registerData, { headers }).pipe(
+            catchError(error => {
+                return throwError(() => new Error(error.error?.message || 'Failed to register'));
+            })
+        );
+    }
+
+    logout(): void {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userId');
+        this.isAuthenticatedSubject.next(false);
+        this.router.navigate(['/login'])
+    }
+
+    private hasToken(): boolean {
+        return !!localStorage.getItem('token');
+    }
+}

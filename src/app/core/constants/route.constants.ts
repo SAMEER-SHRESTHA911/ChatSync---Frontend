@@ -6,5 +6,6 @@ export const ROUTE_CONSTANT = Object.freeze({
     otp: 'otp',
     home: 'home',
     error: '**',
-    notFound: 'not-found'
+    notFound: 'not-found',
+    registerAccount: 'register-account',
 });
