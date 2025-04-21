@@ -4,9 +4,7 @@ import { PrivateRoutingModule } from './private-routing.module';
 import { RouterModule } from '@angular/router';
 import { PrivateComponent } from './private.component';
 import { NavbarComponent } from "../../../feature/private/navbar/navbar.component";
-import { SidebarComponent } from "../../../feature/private/sidebar/sidebar.component";
-
-
+import { SidebarModule } from '../../../feature/private/sidebar/sidebar.module';
 
 @NgModule({
   declarations: [PrivateComponent],
@@ -15,7 +13,7 @@ import { SidebarComponent } from "../../../feature/private/sidebar/sidebar.compo
     PrivateRoutingModule,
     RouterModule,
     NavbarComponent,
-    SidebarComponent
+    SidebarModule
   ]
 })
 export class PrivateModule { }

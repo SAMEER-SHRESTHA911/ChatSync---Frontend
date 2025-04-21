@@ -1,1 +1,51 @@
-<p>sidebar works!</p>
+<div class="main-container">
+      <!-- Header
+      <div class="flex items-center justify-between mb-4">
+        <h1 class="text-lg font-bold text-blue-500">ChatSync</h1>
+        <button mat-icon-button>
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div> -->
+
+      <!-- Search Bar -->
+      <mat-form-field class="w-full mb-4" appearance="outline">
+        <mat-label>Search...</mat-label>
+        <input matInput placeholder="Search...">
+      </mat-form-field>
+
+      <!-- Channels Section -->
+      <div class="flex-1">
+        <div class="flex items-center justify-between mb-2">
+          <h2 class="text-sm font-semibold text-gray-600">Channels</h2>
+          <button mat-icon-button (click)="addChannel()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="space-y-1">
+          <div *ngFor="let channel of channels" 
+               (click)="navigateToChannel(channel.name)"
+               class="flex items-center justify-between p-2 hover:bg-gray-100 rounded-lg cursor-pointer">
+            <span class="text-sm text-gray-800">#{{channel.name}}</span>
+            <span class="text-xs text-gray-500">{{channel.count}}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Section -->
+      <div class="flex items-center space-x-2 mt-4">
+        <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
+        <div class="flex-1">
+          <div (click)="navigateToDirectMessage()"
+               class="text-sm font-medium text-gray-800 hover:underline cursor-pointer">
+            John Doe
+          </div>
+          <div class="text-xs text-green-500">Online</div>
+        </div>
+        <button mat-icon-button>
+          <mat-icon>notifications</mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon>settings</mat-icon>
+        </button>
+      </div>
+    </div>

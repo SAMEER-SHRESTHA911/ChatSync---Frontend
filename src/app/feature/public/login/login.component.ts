@@ -37,15 +37,12 @@ export class LoginComponent implements OnInit {
 
 
   onSubmit(): void {
-    console.log(this.loginForm)
-    console.log(this.loginForm.valid)
     if (this.loginForm.valid) {
       this.auth.login(this.loginForm.value as LoginPayload).pipe(
         takeUntil(this.destroy$)
       )
         .subscribe(
           (result) => {
-            console.log(result)
             this.router.navigate(['home']);
             this.openSnackBar('LogIn Successfully')
           },
