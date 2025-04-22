@@ -4,7 +4,11 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
+body {
+  font-family: 'Inter', sans-serif;
+}
 html,
 body {
   height: 100%;
@@ -39,60 +43,4 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-/* Change the background color of Saturdays */
-.fc-day-sat {
-  background-color: #f0f0f0; /* Light gray */
-}
-
-/* Change the background color of Sundays */
-.fc-day-sun {
-  background-color: #f0f0f0; /* Light gray */
-}
-
-/* Optional: If you want to change the text color too */
-.fc-day-sat,
-.fc-day-sun {
-  color: #ff0000; /* Red text */
-}
-
-.fc-day-sat {
-  background-color: #f0f0f0;
-}
-
-.fc-day-sun {
-  background-color: #f0f0f0;
-}
-
-.fc-day-sat,
-.fc-day-sun {
-  color: #ff0000;
-}
-.fc-event-dot {
-  display: none !important;
-}
-
-.fc-event.checkin-late {
-  background-color: #f44336 !important;
-  border-color: #f44336 !important;
-  color: #ffffff !important;
-}
-
-.fc-event.checkin-on-time {
-  background-color: #4caf50 !important;
-  border-color: #4caf50 !important;
-  color: #ffffff !important;
-}
-
-.fc-event.checkout-early {
-  background-color: #f44336 !important;
-  border-color: #f44336 !important;
-  color: #ffffff !important;
-}
-
-.fc-event.checkout-on-time {
-  background-color: #4caf50 !important;
-  border-color: #4caf50 !important;
-  color: #ffffff !important;
 }

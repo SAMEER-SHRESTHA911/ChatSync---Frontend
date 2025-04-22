@@ -7,5 +7,6 @@ import { RouterModule } from '@angular/router';
   styleUrl: './private.component.scss'
 })
 export class PrivateComponent {
-
+  constructor() {
+  }
 }

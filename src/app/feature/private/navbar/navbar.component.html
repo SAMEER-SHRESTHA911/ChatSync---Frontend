@@ -1,27 +1,15 @@
-<div class="nav-container gradient-background">
+<div class="nav-container">
   <div class="logo">
-    <a [routerLink]="['/home']">
-      <img src="logo.png" alt="ChatSync" />
+    <a [routerLink]="['/home']" class="logo-link">
+      <!-- <img src="logo.png" alt="ChatSync" class="logo-img" /> -->
+      <span class="logo-text">ChatSync</span>
     </a>
-    <h3> ChatSync</h3>
   </div>
-  <div class="profile">
-    <mat-icon
-      mat-button
-      [matMenuTriggerFor]="menu"
-      class="profile-icon cursor-pointer"
-      >account_circle
-    </mat-icon>
-    <mat-menu #menu="matMenu">
-      <!-- <button
-        mat-menu-item
-        [routerLink]="['/admin/profile-details', loggedInUser]"
-      >
-        <mat-icon>person</mat-icon>Profile
-      </button> -->
-      <button mat-menu-item [routerLink]="['/login']" (click)="onLogout()">
-        <mat-icon>exit_to_app</mat-icon>Log Out
-      </button>
-    </mat-menu>
-  </div>
+  <div class="spacer"></div>
+  <div class="actions">
+    <button class="logout-btn" (click)="onLogout()">
+      <mat-icon class="logout-icon">logout</mat-icon>
+      <span>Log Out</span>
+    </button>
+  </div>  
 </div>

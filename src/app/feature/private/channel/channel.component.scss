@@ -1,0 +1,62 @@
+:host {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  background: #e0e7ff;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  gap: 6px;
+
+  &:hover {
+    background: #d1d9ff;
+    transform: scale(1.02);
+  }
+}
+
+.channel-icon {
+  font-size: 16px;
+  height: 16px;
+  width: 16px;
+  color: #3b82f6;
+}
+
+.channel-name {
+  flex: 1;
+  font-size: 0.813rem;
+  color: #3b82f6;
+  text-transform: capitalize;
+}
+
+.channel-count {
+  font-size: 0.688rem;
+  color: #6b7280;
+}
+
+@media (max-width: 768px) {
+  :host {
+    padding: 5px 8px;
+    border-radius: 8px;
+  }
+
+  .channel-icon {
+    font-size: 14px;
+    height: 14px;
+    width: 14px;
+  }
+
+  .channel-name {
+    font-size: 0.75rem;
+  }
+
+  .channel-count {
+    font-size: 0.625rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :host {
+    padding: 4px 6px;
+  }
+}

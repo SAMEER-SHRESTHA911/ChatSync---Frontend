@@ -1,0 +1,67 @@
+<div class="chat-room-container">
+  <!-- Message Panel -->
+  <div class="message-box">
+    <div class="message-panel">
+      <div class="messages-header">
+        <span>Chat Room</span>
+        <button class="toggle-participants" (click)="toggleParticipants()">
+          <span>{{ showParticipants ? 'Hide' : 'Show' }} Active Participants</span>
+          <span class="toggle-icon">{{ showParticipants ? '›' : '‹' }}</span>
+        </button>
+      </div>
+      <div class="messages-content" #messagesContainer>
+        <div class="messages-list" *ngIf="messages.length; else noMessages">
+          <div class="message-item" *ngFor="let message of messages">
+            <div class="message-header">
+              <span class="sender">{{ message.sender }}</span>
+              <span class="timestamp">{{ message.timestamp | date:'shortTime' }}</span>
+            </div>
+            <div class="message-content">{{ message.content }}</div>
+          </div>
+        </div>
+        <ng-template #noMessages>
+          <p class="no-messages">No messages yet.</p>
+        </ng-template>
+      </div>
+    </div>
+
+    <!-- Input Box and Send Button -->
+    <div class="input-section">
+      <input
+        class="message-input"
+        [(ngModel)]="newMessage"
+        (keyup.enter)="sendMessage()"
+        placeholder="Type a message"
+      />
+      <button
+        class="send-button"
+        (click)="sendMessage()"
+        [disabled]="!newMessage"
+      >
+        Send
+      </button>
+    </div>
+  </div>
+
+  <!-- Participant List (positioned absolutely) -->
+  <div
+    class="participant-panel"
+    [@slideInOut]="showParticipants ? 'in' : 'out'"
+    *ngIf="showParticipants"
+  >
+    <div class="participants-header">
+      <span>Participants ({{participants.length}})</span>
+      <mat-icon (click)="closeParticipantsPanel()">close</mat-icon>
+    </div>
+    <div class="participants-content">
+      <div class="participant-item" *ngFor="let participant of participants">
+        <span class="participant-name">{{ participant.name }}</span>
+        <span
+          class="status-icon"
+          [ngClass]="participant.isOnline ? 'online' : 'offline'"
+          [title]="participant.isOnline ? 'Online' : 'Offline'"
+        ></span>
+      </div>
+    </div>
+  </div>
+</div>

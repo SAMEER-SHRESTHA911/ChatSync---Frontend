@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, Subject, tap, throwError } from 'rxjs';
 import { API_URL_CONSTANTS } from '../constants/api-constants';
 import { baseUrl } from '../../environment';
 import { LoginPayload, LoginResponse, RegisterPayload, RegisterResponse } from '../models/interface';
@@ -17,6 +17,7 @@ const {
 })
 export class AuthService {
     private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
+    private logoutSubject = new Subject<void>();
 
     constructor(private http: HttpClient, private router: Router) { }
 
@@ -25,12 +26,18 @@ export class AuthService {
         this.isAuthenticatedSubject.next(true);
     }
 
-    setUserId(userId: string) {
-        localStorage.setItem('userId', userId)
+    setUserId(userId: number) {
+        localStorage.setItem('userId', userId.toString())
     }
 
     getToken(): string | null {
         return localStorage.getItem('token');
+    }
+
+    clearToken(): void {
+        localStorage.removeItem('token');
+        this.logoutSubject.next();
+        this.router.navigate(['/login']);
     }
 
     getUserId(): string | null {
@@ -51,7 +58,10 @@ export class AuthService {
         return this.http.post<LoginResponse>(`${baseUrl}/${auth}/${login}`, credentials, { headers }).pipe(
 
             tap((response: LoginResponse) => {
-                if (response.token) this.setToken(response.token);
+                if (response.token) {
+                    this.setToken(response.token);
+                    this.setUserId(response.userId);
+                }
             }),
             catchError(error => {
                 return throwError(() => new Error('Failed to login'));
@@ -74,6 +84,10 @@ export class AuthService {
         localStorage.removeItem('userId');
         this.isAuthenticatedSubject.next(false);
         this.router.navigate(['/login'])
+    }
+
+    onLogout(): Observable<void> {
+        return this.logoutSubject.asObservable();
     }
 
     private hasToken(): boolean {

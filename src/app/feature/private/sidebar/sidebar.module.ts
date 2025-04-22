@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SidebarRoutingModule } from './sidebar-routing.module';
 import { SidebarComponent } from './sidebar.component';
 import { MaterialsModule } from '../../../material/material.module';
+import { ChannelModule } from '../channel/channel.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { MaterialsModule } from '../../../material/material.module';
   imports: [
     CommonModule,
     SidebarRoutingModule,
-    MaterialsModule
+    MaterialsModule,
+    ChannelModule
   ],
   exports:[SidebarComponent]
 })

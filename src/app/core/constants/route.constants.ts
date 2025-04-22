@@ -1,6 +1,5 @@
 export const ROUTE_CONSTANT = Object.freeze({
     login: 'login',
-    chatRoom: 'chat-room',
     userAccount: 'user',
     forgotPassword: 'forgot-password',
     otp: 'otp',
@@ -8,4 +7,5 @@ export const ROUTE_CONSTANT = Object.freeze({
     error: '**',
     notFound: 'not-found',
     registerAccount: 'register-account',
+    channel: 'channel'
 });

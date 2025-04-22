@@ -1,0 +1,22 @@
+<div class="popup-container">
+  <h2 class="popup-title">Add New Channel</h2>
+  <form (ngSubmit)="onSubmit()" #channelForm="ngForm">
+    <mat-form-field class="channel-input" appearance="outline">
+      <mat-label>Channel Name</mat-label>
+      <input
+        matInput
+        [(ngModel)]="channelName"
+        name="channelName"
+        required
+        placeholder="Enter channel name"
+      />
+      <mat-error *ngIf="channelForm.form.get('channelName')?.valid">
+        Channel name is required
+      </mat-error>
+    </mat-form-field>
+    <div class="button-group">
+      <button mat-button type="button" class="cancel-button" (click)="onCancel()">Cancel</button>
+      <button mat-button type="submit" class="submit-button" [disabled]="!channelForm.valid">Add</button>
+    </div>
+  </form>
+</div>

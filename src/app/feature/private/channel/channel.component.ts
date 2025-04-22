@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ChannelData } from './models/channel.interface';
 
 @Component({
   selector: 'app-channel',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class ChannelComponent {
 
+  @Input({ required: true }) channelData!: ChannelData;
 }

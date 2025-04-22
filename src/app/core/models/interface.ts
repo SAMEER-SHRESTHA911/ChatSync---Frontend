@@ -7,6 +7,7 @@ export interface LoginResponse{
     status: number;
     message: string;
     token: string;
+    userId: number;
 }
 
 export interface RegisterPayload extends LoginPayload{ 
@@ -16,3 +17,14 @@ export interface RegisterPayload extends LoginPayload{
 export interface RegisterResponse extends LoginResponse{ 
 }
 
+export interface ResponseIdentity<T> {
+    data: T;
+    status: number;
+    message: string | null;
+}
+
+export interface ChatMessage {
+    data: string;
+    message: string;
+    status: number;
+}

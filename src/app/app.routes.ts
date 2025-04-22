@@ -15,7 +15,7 @@ export const routes: Routes = [
         canActivate: [authGuard],
         loadChildren: () =>
             import('./core/layout/private/private.module').then(m => m.PrivateModule)
-    },
+    },  
     {
         path: ROUTE_CONSTANT.error,
         component: NotFoundComponent
